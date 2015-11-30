@@ -1,0 +1,15 @@
+{
+  "name": "hg-bot",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "optimistiks",
+  "license": "MIT",
+  "dependencies": {
+    "hangupsjs": "^1.2.0",
+    "q": "^1.4.1",
+  }
+}
