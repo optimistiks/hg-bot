@@ -10,6 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "hangupsjs": "^1.2.0",
-    "q": "^1.4.1",
+    "q": "^1.4.1"
   }
 }

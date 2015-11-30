@@ -18,14 +18,20 @@ var client = new Client();
 // receive chat message events
 client.on('chat_message', function(ev) {
 
-
-
   if (ev.chat_message.message_content.segment  &&
       ev.self_event_state.user_id.gaia_id != ev.sender_id.gaia_id) {
 
-    client.sendchatmessage(ev.conversation_id.id, [
-      [0, 'Hello World']
-    ]);
+    var answer = createAnswer(ev.chat_message.message_content.segment);
+
+    if (answer) {
+
+      var bld = new Client.MessageBuilder();
+      var segments = bld.text(answer).toSegments();
+
+      client.sendchatmessage(ev.conversation_id.id, segments);
+    }
+
+
 
   }
 
@@ -37,3 +43,15 @@ client.on('chat_message', function(ev) {
 client.connect(creds).then(function() {
   console.log('connected');
 }).done();
+
+var createAnswer = function(segments) {
+
+  var response = null;
+  var segment = segments[0];
+
+  if (segment && segment.type === 'TEXT' && segment.text.indexOf('bot') === 0) {
+    response = 'Ты опять выходишь на связь?';
+  }
+
+  return response;
+};
