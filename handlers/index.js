@@ -3,5 +3,6 @@ module.exports = [
   require('./opinion'),
   require('./dagestan'),
   require('./coin'),
+  require('./affirmative'),
   require('./default')
 ];
