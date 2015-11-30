@@ -18,20 +18,15 @@ var client = new Client();
 // receive chat message events
 client.on('chat_message', function(ev) {
 
-  if (ev.chat_message.message_content.segment  &&
+  var segments = ev.chat_message.message_content.segment;
+
+  if (segments && segments.length  &&
       ev.self_event_state.user_id.gaia_id != ev.sender_id.gaia_id) {
 
-    var answer = createAnswer(ev.chat_message.message_content.segment);
+    var answer = createAnswer(segments);
+    var bld = new Client.MessageBuilder();
 
-    if (answer) {
-
-      var bld = new Client.MessageBuilder();
-      var segments = bld.text(answer).toSegments();
-
-      client.sendchatmessage(ev.conversation_id.id, segments);
-    }
-
-
+    client.sendchatmessage(ev.conversation_id.id, bld.text(answer).toSegments());
 
   }
 
@@ -44,13 +39,40 @@ client.connect(creds).then(function() {
   console.log('connected');
 }).done();
 
+var coin = function() {
+  var rand = Math.random();
+  return rand >= 0.5;
+};
+
+var endsWith = function(string, suffix) {
+  return string.indexOf(suffix, string.length - suffix.length) !== -1;
+};
+
+var startsWithBot = function(segments) {
+  var segment = segments[0];
+  return segment && segment.type === 'TEXT' && segment.text.indexOf('бот') === 0;
+};
+
 var createAnswer = function(segments) {
 
   var response = null;
   var segment = segments[0];
+  var normalized = segment.text.trim().toLowerCase();
 
-  if (segment && segment.type === 'TEXT' && segment.text.indexOf('bot') === 0) {
-    response = 'Ты опять выходишь на связь?';
+  var dagRegexp = /хочу.*обратиться.*к.*дагестанцам.*пацанам/;
+
+  if (startsWithBot(segments) && normalized.indexOf('что ты думаешь о') !== -1 && !endsWith(normalized, 'что ты думаешь о')) {
+    if (coin()) {
+      response = 'норм'
+    } else {
+      response = 'хуерга какая то, херобора'
+    }
+  } else if (dagRegexp.test(normalized)) {
+    response = 'я сам из дагестана, алейкум ас-салам'
+  }
+
+  if (startsWithBot(segments) && response === null) {
+    response = 'ты опять выходишь на связь?';
   }
 
   return response;
