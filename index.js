@@ -1,5 +1,6 @@
 var Client = require('hangupsjs');
 var Q = require('q');
+var handlers = require('./handlers');
 
 // callback to get promise for creds using stdin. this in turn
 // means the user must fire up their browser and get the
@@ -23,10 +24,17 @@ client.on('chat_message', function(ev) {
   if (segments && segments.length  &&
       ev.self_event_state.user_id.gaia_id != ev.sender_id.gaia_id) {
 
-    var answer = createAnswer(segments);
-    var bld = new Client.MessageBuilder();
+    var handler = handlers.find(function(handler) {
+      return handler.match(segments);
+    });
 
-    client.sendchatmessage(ev.conversation_id.id, bld.text(answer).toSegments());
+    console.log('found handler', handler);
+
+    if (handler) {
+      var bld = new Client.MessageBuilder();
+      var answer = bld.text(handler.getAnswer(segments)).toSegments();
+      client.sendchatmessage(ev.conversation_id.id, answer);
+    }
 
   }
 
@@ -38,42 +46,3 @@ client.on('chat_message', function(ev) {
 client.connect(creds).then(function() {
   console.log('connected');
 }).done();
-
-var coin = function() {
-  var rand = Math.random();
-  return rand >= 0.5;
-};
-
-var endsWith = function(string, suffix) {
-  return string.indexOf(suffix, string.length - suffix.length) !== -1;
-};
-
-var startsWithBot = function(segments) {
-  var segment = segments[0];
-  return segment && segment.type === 'TEXT' && segment.text.indexOf('бот') === 0;
-};
-
-var createAnswer = function(segments) {
-
-  var response = null;
-  var segment = segments[0];
-  var normalized = segment.text.trim().toLowerCase();
-
-  var dagRegexp = /хочу.*обратиться.*к.*дагестанцам.*пацанам/;
-
-  if (startsWithBot(segments) && normalized.indexOf('что ты думаешь о') !== -1 && !endsWith(normalized, 'что ты думаешь о')) {
-    if (coin()) {
-      response = 'норм'
-    } else {
-      response = 'хуерга какая то, херобора'
-    }
-  } else if (dagRegexp.test(normalized)) {
-    response = 'я сам из дагестана, алейкум ас-салам'
-  }
-
-  if (startsWithBot(segments) && response === null) {
-    response = 'ты опять выходишь на связь?';
-  }
-
-  return response;
-};
