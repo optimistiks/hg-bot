@@ -11,5 +11,8 @@
   "dependencies": {
     "hangupsjs": "^1.2.0",
     "q": "^1.4.1"
+  },
+  "devDependencies": {
+    "forever": "^0.15.1"
   }
 }
