@@ -1,6 +1,7 @@
 var Client = require('hangupsjs');
 var Q = require('q');
 var handlers = require('./handlers');
+var util = require('util');
 
 // callback to get promise for creds using stdin. this in turn
 // means the user must fire up their browser and get the
@@ -38,7 +39,7 @@ client.on('chat_message', function(ev) {
 
   }
 
-  return console.log('chat_message', ev);
+  console.log('chat_message', util.inspect(ev, false, null));
 });
 
 // connect and post a message.
