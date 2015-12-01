@@ -5,7 +5,7 @@ module.exports = {
   match: function(segments) {
 
     var text = utils.getTextFromSegments(segments);
-    var regexp = /даа+/;
+    var regexp = /^даа+/;
 
 
     return regexp.test(text);
