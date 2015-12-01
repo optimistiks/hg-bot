@@ -12,4 +12,5 @@ module.exports = [
   require('./localmems/subscribers'),
   require('./localmems/5'),
   require('./localmems/Night'),
+  require('./localmems/rudeness'),
 ];
