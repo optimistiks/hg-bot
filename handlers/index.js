@@ -5,6 +5,9 @@ module.exports = [
   require('./daaaaa'),
   require('./simple'),
 
+  require('./lol'),
+  require('./RandomAnswers'),
+
   // всегда должен идти последним
   require('./default'), 
 ];
