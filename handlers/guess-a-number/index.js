@@ -7,8 +7,7 @@ module.exports = {
 
   number: null,
 
-  match: function(segments) {
-
+  match: function (segments) {
 
     var text = utils.getTextFromSegments(segments);
 
@@ -17,15 +16,14 @@ module.exports = {
 
   },
 
-
-  getAnswer: function(segments) {
+  getAnswer: function (segments) {
 
     var answer = '';
     var text = utils.getTextFromSegments(segments);
 
     if (text.indexOf(this.guessSuffix) !== -1) {
 
-      this.number = Math.floor(Math.random()*(10-1+1)+1);
+      this.number = Math.floor(Math.random() * (10 - 1 + 1) + 1);
       answer = 'загадал (от 1 до 10)'
 
     } else if (text.indexOf(this.answerSuffix) !== -1) {

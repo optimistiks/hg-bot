@@ -6,8 +6,8 @@ module.exports = [
   require('./simple'),
 
   require('./lol'),
-  require('./RandomAnswers'),
+  require('./random-answers'),
 
   // всегда должен идти последним
-  require('./default'), 
+  require('./default'),
 ];

@@ -4,7 +4,7 @@ module.exports = {
 
   match: function (segments) {
     var text = utils.getTextFromSegments(segments);
-    var regexp = /^лол/;
+    var regexp = /^.+\?$/;
     var rand = Math.random();
     return regexp.test(text) && rand < 0.05;
   },
@@ -12,15 +12,15 @@ module.exports = {
   getAnswer: function (segments) {
 
     var items = [
-      'ахахах',
-      'лал',
-      'ахах, чет с подливой проорал',
-      ')))))))',
-      'ааааааа лоооол',
-      'в голосину прост',
-      'пушка',
-      'скааа, чет ору',
-      'лол??'
+      'чииивооо?',
+      'чёт хз',
+      'ты серьёзно??',
+      'я пас',
+      'ага',
+      'ммм, так так, ещё че нить спроси',
+      'лучше б поинтересовался творчеством Толстого',
+      'неееее',
+      'эммм, ок'
     ];
     return items[Math.floor(Math.random() * items.length)];
 

@@ -2,7 +2,7 @@ var utils = require('../../utils');
 
 module.exports = {
 
-  match: function(segments) {
+  match: function (segments) {
 
     var suffix = 'кинь монетку';
     var text = utils.getTextFromSegments(segments);
@@ -12,8 +12,7 @@ module.exports = {
 
   },
 
-
-  getAnswer: function(segments) {
+  getAnswer: function (segments) {
 
     return utils.throwCoin() ? 'орёл' : 'решка';
 
