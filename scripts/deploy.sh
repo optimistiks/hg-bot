@@ -1,2 +1,3 @@
 #!/usr/bin/env sh
-echo "123"
+export SSHPASS=$SSH_PASS
+sshpass -e ssh $SSH_CONN $PROJECT_PATH/deploy.sh
