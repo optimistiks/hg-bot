@@ -6,8 +6,10 @@ addons:
     packages:
       - sshpass
 after_success:
-  - export SSHPASS=$SSH_PASS
-  - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && sshpass -e ssh $SSH_CONN $PROJECT_PATH/deploy.sh
+  if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+    export SSHPASS=$SSH_PASS
+    sshpass -e ssh $SSH_CONN $PROJECT_PATH/deploy.sh
+  fi
 env:
   global:
     - secure: nN6DGTDyXg0min+J5yYWZ5coVWe/u3uegrTfYXO08cMs51k5Fe4AiswJ/OTkIUwkguknEPml4I7cDrJwJ1A5xkJioaCBQTtgWQfy8PRZrUDuKkNS/NTqpHwZEJZvMnxFw3qDogTX8qaNzSm9WakAsmPFLJaXBVapP0ZtM+7uIFg6J6mKR8jEUfcc3BzQftX6PWuROZTjvYgUVgZ/L+32YKDxYt5P9FLodqvcYXODq9zHTBvXN5Pl+zg/OsTbZQC56LeqFiXbp/C2NJFkPcrbBIPQJtMETxwZcZCwBg/TjnnPfeF6y9ZkEy1gHOx4EWBJnZk5XOWlMm5yFAulpUQz9YLWIta5Op9dsSg7OcMK2+kIfvzSyLwlq6CwKnDXYZXL/BL/t41AGKu6R9l98isPWkgmpYMPcosyle/qXoRnfwivxegtdsJceuzelFwbOkVBwf1g5SsEdgxn0tjTGn2DvFqoxazZIuEeFrE1NY3W85cwVfzL/MIAlkwRkD/NHYc0XizzKwXaFeQJVdqcAedRl1JKwPgtuzwoE2iNJIOx5rGOw55c7LCDNLP9IQP1D5TtM22g3nf0gHedkYhSZlS165mDzDFgpjv/6muNhB8PM6ym8VESg8D+NOGpl9agYmvclfUoAAPUkVgNc5/ym10QnBmFjZ8e4APXal9lYLSwrkA=
