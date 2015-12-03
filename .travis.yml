@@ -7,7 +7,7 @@ addons:
       - sshpass
 deploy:
   provider: script
-  script: do_deploy.sh
+  script: scripts/deploy.sh
   on:
     branch: master
 env:
