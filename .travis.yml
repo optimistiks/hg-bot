@@ -5,6 +5,8 @@ addons:
   apt:
     packages:
       - sshpass
+  ssh_known_hosts:
+    - 95.85.2.65
 after_success:
   - export SSHPASS=$SSH_PASS
   - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && sshpass -e ssh $SSH_CONN $PROJECT_PATH/deploy.sh
