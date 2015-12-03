@@ -6,9 +6,11 @@ addons:
     packages:
       - sshpass
 after_success:
-  if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-    export SSHPASS=$SSH_PASS
-    sshpass -e ssh $SSH_CONN $PROJECT_PATH/deploy.sh
+  if ([ "$TRAVIS_BRANCH" == "master" ] || [ ! -z "$TRAVIS_TAG" ]) &&
+      [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+    echo "This will deploy!"
+  else
+    echo "This will not deploy!"
   fi
 env:
   global:
