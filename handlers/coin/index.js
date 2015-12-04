@@ -2,19 +2,19 @@ var utils = require('../../utils');
 
 module.exports = {
 
-  match: function (segments) {
+    match: function (segments) {
 
-    var suffix = 'кинь монетку';
-    var text = utils.getTextFromSegments(segments);
+        var suffix = 'кинь монетку';
+        var text = utils.getTextFromSegments(segments);
 
-    return utils.appealToBot(text) &&
-           text.indexOf(suffix) !== -1;
+        return utils.appealToBot(text) &&
+            text.indexOf(suffix) !== -1;
 
-  },
+    },
 
-  getAnswer: function (segments) {
+    getAnswer: function (segments) {
 
-    return utils.throwCoin() ? 'орёл' : 'решка';
+        return utils.throwCoin() ? 'орёл' : 'решка';
 
-  }
+    }
 };
