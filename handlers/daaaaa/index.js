@@ -6,9 +6,9 @@ module.exports = {
 
     var text = utils.getTextFromSegments(segments);
     var regexp = /^даа+/;
-
-    return regexp.test(text);
-
+    var rand = Math.random();
+    return regexp.test(text) && rand <= 0.5;
+    
   },
 
   getAnswer: function (segments) {
