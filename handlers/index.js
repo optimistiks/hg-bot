@@ -1,4 +1,5 @@
 module.exports = [
+    require('./quiz'),
     require('./guess-a-number'),
     require('./opinion'),
     require('./coin'),

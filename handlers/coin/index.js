@@ -12,9 +12,9 @@ module.exports = {
 
     },
 
-    getAnswer: function (segments) {
+    handle: function (segments, sendMessage) {
 
-        return utils.throwCoin() ? 'орёл' : 'решка';
+        sendMessage(utils.throwCoin() ? 'орёл' : 'решка');
 
     }
 };

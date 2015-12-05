@@ -9,7 +9,7 @@ module.exports = {
         return regexp.test(text) && rand < 0.05;
     },
 
-    getAnswer: function (segments) {
+    handle: function (segments, sendMessage) {
 
         var items = [
             'чииивооо?',
@@ -22,7 +22,7 @@ module.exports = {
             'неееее',
             'эммм, ок'
         ];
-        return items[Math.floor(Math.random() * items.length)];
+        sendMessage(items[Math.floor(Math.random() * items.length)]);
 
     }
 };

@@ -16,7 +16,7 @@ module.exports = {
 
     },
 
-    getAnswer: function (segments) {
+    handle: function (segments, sendMessage) {
 
         var answer = '';
         var text = utils.getTextFromSegments(segments);
@@ -40,7 +40,7 @@ module.exports = {
 
         }
 
-        return answer;
+        sendMessage(answer)
 
     }
 };

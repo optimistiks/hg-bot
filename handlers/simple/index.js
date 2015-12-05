@@ -26,9 +26,9 @@ module.exports = {
 
     },
 
-    getAnswer: function (segments) {
+    handle: function (segments, sendMessage) {
 
-        return this.possibleAnswers[Math.floor(Math.random() * this.possibleAnswers.length)]
+        sendMessage(this.possibleAnswers[Math.floor(Math.random() * this.possibleAnswers.length)])
 
     }
 };

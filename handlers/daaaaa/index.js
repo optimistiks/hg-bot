@@ -11,7 +11,7 @@ module.exports = {
 
     },
 
-    getAnswer: function (segments) {
+    handle: function (segments, sendMessage) {
 
         var aaa = '';
         var rand = Math.floor(Math.random() * 10) + 1;
@@ -44,6 +44,6 @@ module.exports = {
             'перспектив то никаких...'
         ];
         var item = items[Math.floor(Math.random() * items.length)];
-        return 'да' + aaa + ', ' + item;
+        sendMessage('да' + aaa + ', ' + item);
     }
 };

@@ -9,7 +9,7 @@ module.exports = {
 
     },
 
-    getAnswer: function (segments) {
+    handle: function (segments, sendMessage) {
 
         var items = [
             'ты опять выходишь на связь?',
@@ -55,7 +55,7 @@ module.exports = {
             'ЗАЧЕЕЕМ МЕНЯ ПРИЗВААЛИИ?'
         ];
 
-        return items[Math.floor(Math.random() * items.length)];
+        sendMessage(items[Math.floor(Math.random() * items.length)])
 
     }
 };
